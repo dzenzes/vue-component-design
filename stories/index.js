@@ -12,6 +12,7 @@ import {
 import { library } from "@fortawesome/fontawesome-svg-core"
 import PropsButton from "./PropsButton.vue"
 import SlotButton from "./SlotButton.vue"
+import SlotFallbackButton from "./SlotFallbackButton.vue"
 import ScopedSlotButton from "./ScopedSlotButton.vue"
 library.add(faUser, faArrowLeft, faArrowRight)
 
@@ -79,6 +80,29 @@ storiesOf("Button with Slot", module)
     <slot-button>
       <loading color="#fff" size="12px" />
     </slot-button>
+    `
+  }))
+
+storiesOf("Button with Slot and Fallback", module)
+  .add("just default text", () => ({
+    components: { SlotFallbackButton },
+    template: "<slot-fallback-button />"
+  }))
+  .add("icon on the right", () => ({
+    components: { SlotButton, FontAwesomeIcon },
+    template: `
+    <slot-button>
+      MyText
+      <font-awesome-icon icon="arrow-right" />
+    </slot-button>
+    `
+  }))
+  .add("custom text from parent", () => ({
+    components: { SlotFallbackButton },
+    template: `
+    <slot-fallback-button>
+      my custom text
+    </slot-fallback-button>
     `
   }))
 
